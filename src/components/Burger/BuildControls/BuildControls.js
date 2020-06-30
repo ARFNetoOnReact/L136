@@ -25,6 +25,9 @@ const buildControls = (props) => (
             )
         )}
         
+        <button>
+            ORDER NOW
+        </button>
     </div>
 );
 
