@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
+import Modal from '../../components/UI/Modal/Modal';
 import Wrap from "../../hoc/Wrap";
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES =  {
     salad:  0.5,
@@ -25,7 +27,18 @@ class BurgerBuilder extends Component
             cheese: 0,
             meat: 0
         },
-        totalPrice: 4
+        totalPrice: 4,
+        purchasable: false
+    };
+
+    updatePurchaseState(ingredients){
+        const sum = Object
+            .keys(ingredients)
+            .map(igKey => {
+                return ingredients[igKey];
+            })
+            .reduce((sum,el) => { return sum + el;},0);
+        this.setState({purchasable: sum>0});
     };
 
     addIngredientHandler =
@@ -43,6 +56,7 @@ class BurgerBuilder extends Component
                     totalPrice:  newPrice,
                     ingredients: updatedIngredients
             });
+            this.updatePurchaseState(updatedIngredients);
         }
 
     removeIngredientHandler =
@@ -60,6 +74,7 @@ class BurgerBuilder extends Component
                     totalPrice:  newPrice,
                     ingredients: updatedIngredients
             });
+            this.updatePurchaseState(updatedIngredients);
       
     };
 
@@ -73,12 +88,16 @@ class BurgerBuilder extends Component
 
         return (
             <Wrap>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                     disabled={ disabledInfo }
                     ingredientAdded = {this.addIngredientHandler}
                     ingredientRemoved = {this.removeIngredientHandler}
                     price = { this.state.totalPrice }
+                    purchasable={ this.state.purchasable }
                     />
             </Wrap>
         );
