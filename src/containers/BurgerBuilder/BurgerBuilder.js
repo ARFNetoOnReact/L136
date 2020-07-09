@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
 import Modal from '../../components/UI/Modal/Modal';
-import Wrap from "../../hoc/Wrap";
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Wrap from "../../hoc/Wrap";
 
 const INGREDIENT_PRICES =  {
     salad:  0.5,
@@ -45,7 +45,6 @@ class BurgerBuilder extends Component
         (type) => {
             const oldCount = this.state.ingredients[type];
             const updatedCount = oldCount + 1;
-            //const updatedCount = 1;
             const updatedIngredients = { ...this.state.ingredients };
             updatedIngredients[type] = updatedCount;
             const priceAddition = INGREDIENT_PRICES[type];

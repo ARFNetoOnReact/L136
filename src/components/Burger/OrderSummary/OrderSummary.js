@@ -3,8 +3,8 @@ import Wrap from '../../../hoc/Wrap';
 
 const orderSummary = (props) =>
 {
-
-    const ingredientSummary = Object.keys(props.ingredients)
+    const ingredientSummary = Object
+        .keys(props.ingredients)
         .map( 
             igKey => { 
                 return (
@@ -17,18 +17,18 @@ const orderSummary = (props) =>
             } 
         );
 
-        return (
-            <Wrap>
-                <h3>Your Order</h3>
-                <p>Description</p>
-                <ul>
-                    {ingredientSummary}
-                </ul>
-                <p>
-                    Continue to Checkout?
-                </p>
-            </Wrap>
-        );
+    return (
+        <Wrap>
+            <h3>Your Order</h3>
+            <p>Description</p>
+            <ul>
+                {ingredientSummary}
+            </ul>
+            <p>
+                Continue to Checkout?
+            </p>
+        </Wrap>
+    );
 };
 
 export default orderSummary;
